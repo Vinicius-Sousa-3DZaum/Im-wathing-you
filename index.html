@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="port">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <title>Found you</title>
+        <meta property="og:title" content="I can see you">
+        <meta property="og:site_name" content="I can hear you">
+        <meta property="og:description" content="Don't look behind you">
+        <meta property="og:type" content="website">
+        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="shortcut icon" href="assets/img/herobrine-1.ico">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;900&display=swap" rel="stylesheet">
+    </head>
+
+    <body>
+        <div id="overlay" class="overlay">
+            <div class="overlay-body">
+                <p class="overlay-title">o que está fazendo aqui?</p>
+                <p class="overlay-description">você entrou em um site restrito, deseja continuar?</p>
+                <div class="overlay-buttons-wrapper">
+                    <div id="accept-button" class="overlay-button">Sim</div>
+                    <div id="decline-button" class="overlay-button">Não</div>
+                </div>
+            </div>
+        </div>
+        <div class="scare">
+            <video id="video" class="video" src="assets/video/Herobrine scream.mp4" loop></video>
+        </div>
+        <script type="text/javascript">
+            const video = document.getElementById("video");
+            const overlay = document.getElementById("overlay");
+            const declineButton = document.getElementById("decline-button");
+            const acceptButton = document.getElementById("accept-button");
+
+            let hasClicked;
+
+    		window.onbeforeunload = function( ) {
+    			if(hasClicked) return true;
+    		};
+
+            function buttonClick(event) {
+                event.preventDefault();
+                if(!hasClicked) hasClicked = true;
+                overlay.classList.add("hidden");
+                video.play();
+                videoClick();
+            }
+
+            function videoClick(event) {
+                if(event) event.preventDefault();
+                // if not fullscreen
+                const { documentElement } = document;
+    			if(documentElement.requestFullscreen) documentElement.requestFullscreen();
+    			else if(documentElement.mozRequestFullScreen) documentElement.mozRequestFullScreen();
+    			else if(documentElement.webkitRequestFullscreen) documentElement.webkitRequestFullscreen();
+    			else if(documentElement.msRequestFullscreen) full.msRequestFullscreen();
+            }
+
+            acceptButton.addEventListener("click", buttonClick);
+            declineButton.addEventListener("click", buttonClick);
+            video.addEventListener("click", videoClick);
+        </script>
+    </body>
+</html>
